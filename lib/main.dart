@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:viewster/screens/BottomNavigator/BottomNavigator.dart';
+import 'package:viewster/screens/auth/Signin.dart';
 import 'package:viewster/screens/auth/Signup.dart';
 
 void main() async {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Signup(),
+      home: Signin(),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Signin extends StatefulWidget {
   @override
@@ -7,8 +8,22 @@ class Signin extends StatefulWidget {
 }
 
 class _SigninState extends State<Signin> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
   TextStyle defaultStyle = TextStyle(color: Colors.grey, fontSize: 15.0);
   TextStyle linkStyle = TextStyle(color: Colors.orange);
+
+  String email = "";
+  String password = "";
+
+  void signin() async {
+    print("$email $password");
+    UserCredential result =
+        await auth.signInWithEmailAndPassword(email: email, password: password);
+
+    User user = result.user;
+    print(user);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +58,11 @@ class _SigninState extends State<Signin> {
               height: 20,
             ),
             TextFormField(
+              onChanged: (val) {
+                setState(() {
+                  email = val;
+                });
+              },
               decoration: InputDecoration(
                 icon: Icon(
                   Icons.email,
@@ -59,6 +79,11 @@ class _SigninState extends State<Signin> {
               height: 10,
             ),
             TextFormField(
+              onChanged: (val) {
+                setState(() {
+                  password = val;
+                });
+              },
               obscureText: true,
               decoration: InputDecoration(
                 icon: Icon(
@@ -77,7 +102,7 @@ class _SigninState extends State<Signin> {
             ),
             Center(
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: signin,
                 child: Text(
                   "Log in",
                   style: TextStyle(fontSize: 15),
