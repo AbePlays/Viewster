@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Signup extends StatefulWidget {
   @override
@@ -7,8 +8,25 @@ class Signup extends StatefulWidget {
 }
 
 class _SignupState extends State<Signup> {
+  FirebaseAuth auth = FirebaseAuth.instance;
   TextStyle defaultStyle = TextStyle(color: Colors.grey, fontSize: 15.0);
   TextStyle linkStyle = TextStyle(color: Colors.orange);
+
+  String email = "";
+  String password = "";
+  String confirmPassword = "";
+
+  void signup() async {
+    print(email + " " + password + " " + confirmPassword);
+    try {
+      UserCredential result = await auth.createUserWithEmailAndPassword(
+          email: email, password: password);
+      User user = result.user;
+      print(user);
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,6 +74,11 @@ class _SignupState extends State<Signup> {
               height: 10,
             ),
             TextFormField(
+              onChanged: (val) {
+                setState(() {
+                  email = val;
+                });
+              },
               decoration: InputDecoration(
                 icon: Icon(
                   Icons.email,
@@ -72,6 +95,11 @@ class _SignupState extends State<Signup> {
               height: 10,
             ),
             TextFormField(
+              onChanged: (val) {
+                setState(() {
+                  password = val;
+                });
+              },
               obscureText: true,
               decoration: InputDecoration(
                 icon: Icon(
@@ -89,6 +117,11 @@ class _SignupState extends State<Signup> {
               height: 10,
             ),
             TextFormField(
+              onChanged: (val) {
+                setState(() {
+                  confirmPassword = val;
+                });
+              },
               obscureText: true,
               decoration: InputDecoration(
                 icon: Icon(
@@ -107,7 +140,7 @@ class _SignupState extends State<Signup> {
             ),
             Center(
               child: RaisedButton(
-                onPressed: () {},
+                onPressed: signup,
                 child: Text(
                   "Sign up",
                   style: TextStyle(fontSize: 15),
