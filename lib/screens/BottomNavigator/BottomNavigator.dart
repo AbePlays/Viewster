@@ -10,7 +10,7 @@ class BottomNavigator extends StatefulWidget {
 }
 
 class _BottomNavigatorState extends State<BottomNavigator> {
-  int currentIndex = 0;
+  int currentIndex = 3;
 
   List<Widget> screenList = [
     Home(),
@@ -22,11 +22,7 @@ class _BottomNavigatorState extends State<BottomNavigator> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        child: Center(
-          child: screenList[currentIndex],
-        ),
-      ),
+      body: SafeArea(child: screenList[currentIndex]),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentIndex,
         type: BottomNavigationBarType.fixed,
