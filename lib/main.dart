@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:viewster/screens/auth/Signin.dart';
+import 'package:viewster/screens/auth/Signup.dart';
 
 void main() {
   runApp(MyApp());
@@ -13,6 +13,6 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: Signin());
+        home: Signup());
   }
 }
