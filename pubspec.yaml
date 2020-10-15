@@ -47,6 +47,10 @@ flutter:
     - assets/images/signin.png
     - assets/images/signup.png
     - assets/images/profile.png
+    - assets/images/bttf.jpg
+    - assets/images/joker.jpg
+    - assets/images/panther.jpg
+    - assets/images/venom.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 

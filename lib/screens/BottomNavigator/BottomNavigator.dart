@@ -10,7 +10,7 @@ class BottomNavigator extends StatefulWidget {
 }
 
 class _BottomNavigatorState extends State<BottomNavigator> {
-  int currentIndex = 3;
+  int currentIndex = 0;
 
   List<Widget> screenList = [
     Home(),
