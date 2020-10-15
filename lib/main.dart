@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:viewster/screens/BottomNavigator/BottomNavigator.dart';
 import 'package:viewster/screens/auth/Signin.dart';
-import 'package:viewster/screens/auth/Signup.dart';
+import 'package:viewster/Loading.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,8 +52,6 @@ class _MyAppState extends State<MyApp> {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: checking
-            ? Text("Hello")
-            : userFound ? BottomNavigator() : Signin());
+        home: checking ? Loading() : userFound ? BottomNavigator() : Signin());
   }
 }
