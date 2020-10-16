@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:viewster/screens/BottomNavigator/BottomNavigator.dart';
+import 'package:viewster/screens/Search/Search.dart';
 import 'package:viewster/screens/auth/Signin.dart';
 import 'package:viewster/Loading.dart';
 
@@ -26,12 +27,11 @@ class _MyAppState extends State<MyApp> {
       });
       if (user == null) {
         print("Nope");
-        setState(() {
-          userFound = false;
-        });
       } else {
         print("Yep");
-        userFound = true;
+        setState(() {
+          userFound = true;
+        });
       }
     });
   }
@@ -39,19 +39,21 @@ class _MyAppState extends State<MyApp> {
   bool checking = true;
   bool userFound = false;
 
-  @override
-  void initState() {
-    super.initState();
-    checkUser();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   checkUser();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: checking ? Loading() : userFound ? BottomNavigator() : Signin());
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      // home: checking ? Loading() : userFound ? BottomNavigator() : Signin());
+      home: Search(),
+    );
   }
 }

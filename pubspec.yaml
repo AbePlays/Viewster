@@ -30,6 +30,8 @@ dependencies:
   firebase_auth: ^0.18.1+2
   cloud_firestore:
   flutter_spinkit: "^4.1.2"
+  provider: ^4.3.2+2
+  http: ^0.12.2
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +56,7 @@ flutter:
     - assets/images/joker.jpg
     - assets/images/panther.jpg
     - assets/images/venom.jpeg
+    - assets/images/notfound.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
