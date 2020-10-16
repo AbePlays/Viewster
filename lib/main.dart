@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:viewster/screens/BottomNavigator/BottomNavigator.dart';
+import 'package:viewster/screens/Details/TvDetails.dart';
 import 'package:viewster/screens/Search/Search.dart';
 import 'package:viewster/screens/auth/Signin.dart';
 import 'package:viewster/Loading.dart';
@@ -53,7 +54,7 @@ class _MyAppState extends State<MyApp> {
         primarySwatch: Colors.blue,
       ),
       // home: checking ? Loading() : userFound ? BottomNavigator() : Signin());
-      home: Search(),
+      home: TvDetails(),
     );
   }
 }
