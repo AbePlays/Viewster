@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:viewster/screens/Details/TvDetails.dart';
 import 'dart:convert' as convert;
 
 import 'package:viewster/screens/Search/SearchCard.dart';
@@ -21,7 +22,7 @@ class _SearchState extends State<Search> {
     print('$query $current');
 
     String url =
-        'https://api.themoviedb.org/3/search/$current?api_key=6458ca648b70d6d3d574f8e0b2ce817d&language=en-US&query=$query';
+        'https://api.themoviedb.org/3/search/$current?api_key=6458ca648b70d6d3d574f8e0b2ce817d&language=en-US&query=$query&append_to_response=credits';
     print(url);
 
     try {
@@ -30,7 +31,6 @@ class _SearchState extends State<Search> {
       setState(() {
         results = jsonResponse['results'];
       });
-      print(results[0].runtimeType);
     } catch (e) {
       print(e);
     }
@@ -118,12 +118,23 @@ class _SearchState extends State<Search> {
                       votes: results[index]['vote_average'].toString(),
                     );
                   } else {
-                    return SearchCard(
-                      imageUrl: results[index]['poster_path'],
-                      language: results[index]['original_language'],
-                      releaseDate: results[index]['first_air_date'],
-                      title: results[index]['original_name'],
-                      votes: results[index]['vote_average'].toString(),
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TvDetails(
+                                    id: results[index]['id'],
+                                  )),
+                        );
+                      },
+                      child: SearchCard(
+                        imageUrl: results[index]['poster_path'],
+                        language: results[index]['original_language'],
+                        releaseDate: results[index]['first_air_date'],
+                        title: results[index]['original_name'],
+                        votes: results[index]['vote_average'].toString(),
+                      ),
                     );
                   }
                 },
