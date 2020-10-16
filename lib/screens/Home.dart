@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:viewster/screens/Search/Search.dart';
 import 'package:viewster/screens/Trending/Trending.dart';
 
 class Home extends StatefulWidget {
@@ -21,9 +22,17 @@ class _HomeState extends State<Home> {
               Container(
                 child: Row(
                   children: <Widget>[
-                    Icon(
-                      Icons.search,
-                      size: 30,
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Search()),
+                        );
+                      },
+                      child: Icon(
+                        Icons.search,
+                        size: 30,
+                      ),
                     ),
                     SizedBox(
                       width: 20,

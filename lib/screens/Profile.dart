@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -6,6 +7,16 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  FirebaseAuth auth = FirebaseAuth.instance;
+
+  void signout() async {
+    try {
+      await auth.signOut();
+    } catch (e) {
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -145,7 +156,7 @@ class _ProfileState extends State<Profile> {
           ),
           RaisedButton(
             padding: EdgeInsets.symmetric(vertical: 15),
-            onPressed: () {},
+            onPressed: signout,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
