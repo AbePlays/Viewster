@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:viewster/screens/Details/MovieDetails.dart';
 import 'package:viewster/screens/Details/TvDetails.dart';
 import 'dart:convert' as convert;
 
@@ -110,12 +111,23 @@ class _SearchState extends State<Search> {
                 itemCount: results.length,
                 itemBuilder: (context, index) {
                   if (current == "movie") {
-                    return SearchCard(
-                      imageUrl: results[index]['poster_path'],
-                      language: results[index]['original_language'],
-                      releaseDate: results[index]['release_date'],
-                      title: results[index]['original_title'],
-                      votes: results[index]['vote_average'].toString(),
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MovieDetails(
+                                    id: results[index]['id'],
+                                  )),
+                        );
+                      },
+                      child: SearchCard(
+                        imageUrl: results[index]['poster_path'],
+                        language: results[index]['original_language'],
+                        releaseDate: results[index]['release_date'],
+                        title: results[index]['original_title'],
+                        votes: results[index]['vote_average'].toString(),
+                      ),
                     );
                   } else {
                     return GestureDetector(

@@ -4,24 +4,24 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:viewster/Loading.dart';
 
-class TvDetails extends StatefulWidget {
+class MovieDetails extends StatefulWidget {
   final int id;
 
-  TvDetails({
+  MovieDetails({
     this.id,
   });
 
   @override
-  _TvDetailsState createState() => _TvDetailsState();
+  _MovieDetailsState createState() => _MovieDetailsState();
 }
 
-class _TvDetailsState extends State<TvDetails> {
+class _MovieDetailsState extends State<MovieDetails> {
   Map results = {};
   bool loading = true;
 
   fetchData() async {
     String url =
-        "https://api.themoviedb.org/3/tv/${widget.id}?api_key=6458ca648b70d6d3d574f8e0b2ce817d&language=en-US&append_to_response=credits";
+        "https://api.themoviedb.org/3/movie/${widget.id}?api_key=6458ca648b70d6d3d574f8e0b2ce817d&language=en-US&append_to_response=credits";
 
     try {
       var response = await http.get(url);
@@ -68,7 +68,7 @@ class _TvDetailsState extends State<TvDetails> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "${results['original_name']} (${DateFormat('yyyy').format(DateTime.parse(results['first_air_date']))})",
+                          "${results['original_title']} (${DateFormat('yyyy').format(DateTime.parse(results['release_date']))})",
                           style: TextStyle(
                               fontWeight: FontWeight.bold, fontSize: 30),
                         ),
@@ -125,50 +125,6 @@ class _TvDetailsState extends State<TvDetails> {
                         ),
                         SizedBox(
                           height: 10,
-                        ),
-                        Text(
-                          "Creator(s)",
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 23),
-                        ),
-                        Container(
-                          padding: EdgeInsets.symmetric(vertical: 20),
-                          height: 290,
-                          child: ListView.separated(
-                            scrollDirection: Axis.horizontal,
-                            itemCount: results['created_by'].length ?? 0,
-                            separatorBuilder: (context, index) {
-                              return SizedBox(
-                                width: 10,
-                              );
-                            },
-                            itemBuilder: (context, index) {
-                              return Card(
-                                elevation: 2,
-                                child: Column(
-                                  children: <Widget>[
-                                    FadeInImage.assetNetwork(
-                                      width: 150,
-                                      height: 180,
-                                      placeholder: "assets/images/notfound.png",
-                                      image:
-                                          "https://image.tmdb.org/t/p/w154${results['created_by'][index]['profile_path']}",
-                                      fit: BoxFit.fitWidth,
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    Text(
-                                      results['created_by'][index]['name'],
-                                      softWrap: true,
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
-                                    )
-                                  ],
-                                ),
-                              );
-                            },
-                          ),
                         ),
                         Text(
                           "Cast(s)",
