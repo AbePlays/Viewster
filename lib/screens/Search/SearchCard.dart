@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class SearchCard extends StatefulWidget {
-  final Map result;
+  final String title;
+  final String imageUrl;
+  final String votes;
+  final String releaseDate;
+  final String language;
 
-  SearchCard({this.result});
+  SearchCard(
+      {this.imageUrl, this.title, this.language, this.releaseDate, this.votes});
 
   @override
   _SearchCardState createState() => _SearchCardState();
@@ -22,8 +27,7 @@ class _SearchCardState extends State<SearchCard> {
             children: <Widget>[
               FadeInImage.assetNetwork(
                   placeholder: 'assets/images/notfound.png',
-                  image:
-                      "https://image.tmdb.org/t/p/w92${widget.result['poster_path']}"),
+                  image: "https://image.tmdb.org/t/p/w92${widget.imageUrl}"),
               SizedBox(
                 width: 20,
               ),
@@ -33,7 +37,7 @@ class _SearchCardState extends State<SearchCard> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text(
-                      widget.result['original_title'] ?? "Default",
+                      widget.title ?? "Default",
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -46,7 +50,7 @@ class _SearchCardState extends State<SearchCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Language : ${widget.result['original_language'] ?? "-"}",
+                          "Language : ${widget.language ?? "-"}",
                           style: TextStyle(
                               color: Colors.grey,
                               fontWeight: FontWeight.bold,
@@ -70,7 +74,7 @@ class _SearchCardState extends State<SearchCard> {
                               size: 20,
                             ),
                             Text(
-                              widget.result['vote_average'].toString(),
+                              widget.votes,
                               style: TextStyle(
                                   color: Colors.grey,
                                   fontWeight: FontWeight.bold,
@@ -82,7 +86,7 @@ class _SearchCardState extends State<SearchCard> {
                           height: 10,
                         ),
                         Text(
-                          "Release Date : ${widget.result['release_date'] ?? "-"}",
+                          "Release Date : ${widget.releaseDate ?? "-"}",
                           style: TextStyle(
                               color: Colors.grey,
                               fontWeight: FontWeight.bold,

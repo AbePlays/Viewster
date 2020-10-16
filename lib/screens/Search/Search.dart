@@ -15,22 +15,25 @@ class _SearchState extends State<Search> {
   List results = [];
 
   void search() async {
+    setState(() {
+      results = [];
+    });
     print('$query $current');
 
     String url =
         'https://api.themoviedb.org/3/search/$current?api_key=6458ca648b70d6d3d574f8e0b2ce817d&language=en-US&query=$query';
     print(url);
 
-    // try {
-    //   var response = await http.get(url);
-    //   var jsonResponse = convert.jsonDecode(response.body);
-    //   setState(() {
-    //     results = jsonResponse['results'];
-    //   });
-    //   print(results[0].runtimeType);
-    // } catch (e) {
-    //   print(e);
-    // }
+    try {
+      var response = await http.get(url);
+      var jsonResponse = convert.jsonDecode(response.body);
+      setState(() {
+        results = jsonResponse['results'];
+      });
+      print(results[0].runtimeType);
+    } catch (e) {
+      print(e);
+    }
   }
 
   @override
@@ -78,6 +81,7 @@ class _SearchState extends State<Search> {
                         groupValue: current,
                         onChanged: (String value) {
                           setState(() {
+                            results = [];
                             current = value;
                           });
                         },
@@ -89,6 +93,7 @@ class _SearchState extends State<Search> {
                         groupValue: current,
                         onChanged: (String value) {
                           setState(() {
+                            results = [];
                             current = value;
                           });
                         },
@@ -104,9 +109,23 @@ class _SearchState extends State<Search> {
                 scrollDirection: Axis.vertical,
                 itemCount: results.length,
                 itemBuilder: (context, index) {
-                  return SearchCard(
-                    result: results[index],
-                  );
+                  if (current == "movie") {
+                    return SearchCard(
+                      imageUrl: results[index]['poster_path'],
+                      language: results[index]['original_language'],
+                      releaseDate: results[index]['release_date'],
+                      title: results[index]['original_title'],
+                      votes: results[index]['vote_average'].toString(),
+                    );
+                  } else {
+                    return SearchCard(
+                      imageUrl: results[index]['poster_path'],
+                      language: results[index]['original_language'],
+                      releaseDate: results[index]['first_air_date'],
+                      title: results[index]['original_name'],
+                      votes: results[index]['vote_average'].toString(),
+                    );
+                  }
                 },
               ),
             )
