@@ -48,6 +48,9 @@ class _TvDetailsState extends State<TvDetails> {
         title: Text("Details"),
         centerTitle: true,
         backgroundColor: Colors.black12,
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.favorite_border), onPressed: () {})
+        ],
       ),
       body: loading
           ? Loading()

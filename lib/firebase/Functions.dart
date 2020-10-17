@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:viewster/models/MovieModel.dart';
+import 'dart:convert' as convert;
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 final FirebaseAuth auth = FirebaseAuth.instance;
@@ -41,6 +43,38 @@ Future<void> createUserInFirestore(User user) async {
       "name": "Test",
       "email": user.email,
     });
+  } catch (e) {
+    print(e);
+  }
+}
+
+User getCurrentUser() {
+  try {
+    User user = auth.currentUser;
+    return user;
+  } catch (e) {
+    print(e);
+  }
+
+  return null;
+}
+
+Future<void> addDataToFirestore(Map data) async {
+  User user = getCurrentUser();
+  if (user == null) {
+    print("Error");
+    return;
+  }
+  try {
+    DocumentSnapshot doc =
+        await firestore.collection("users").doc(user.uid).get();
+    Map docData = doc.data();
+    docData['favoriteMovies'].add(data);
+
+    await firestore
+        .collection("users")
+        .doc(user.uid)
+        .update({"favoriteMovies": docData['favoriteMovies']});
   } catch (e) {
     print(e);
   }

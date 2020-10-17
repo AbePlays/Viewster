@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:viewster/Loading.dart';
+import 'package:viewster/provider/FavoritesProvider.dart';
 
 class MovieDetails extends StatefulWidget {
   final int id;
@@ -45,10 +47,17 @@ class _MovieDetailsState extends State<MovieDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Details"),
-        centerTitle: true,
-        backgroundColor: Colors.black12,
-      ),
+          title: Text("Details"),
+          centerTitle: true,
+          backgroundColor: Colors.black12,
+          actions: <Widget>[
+            IconButton(
+                icon: Icon(Icons.favorite_border),
+                onPressed: () async {
+                  await Provider.of<FavoritesProvider>(context, listen: false)
+                      .addMovie(results);
+                })
+          ]),
       body: loading
           ? Loading()
           : SingleChildScrollView(
