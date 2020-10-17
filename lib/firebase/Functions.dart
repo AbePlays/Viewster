@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:viewster/models/MovieModel.dart';
-import 'dart:convert' as convert;
 
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 final FirebaseAuth auth = FirebaseAuth.instance;
@@ -17,13 +15,13 @@ Future<void> signIn(String email, String password) async {
   }
 }
 
-Future<void> signUp(String email, String password) async {
+Future<void> signUp(String email, String password, String name) async {
   try {
     UserCredential result = await auth.createUserWithEmailAndPassword(
         email: email, password: password);
     User user = result.user;
     print(user);
-    await createUserInFirestore(user);
+    await createUserInFirestore(user, name);
   } catch (e) {
     print(e);
   }
@@ -37,11 +35,13 @@ Future<void> signout() async {
   }
 }
 
-Future<void> createUserInFirestore(User user) async {
+Future<void> createUserInFirestore(User user, String name) async {
   try {
     await firestore.collection('users').doc(user.uid).set({
-      "name": "Test",
+      "name": name,
       "email": user.email,
+      "favoriteMovies": [],
+      "favoriteShows": []
     });
   } catch (e) {
     print(e);

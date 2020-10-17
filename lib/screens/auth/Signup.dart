@@ -13,13 +13,43 @@ class _SignupState extends State<Signup> {
   TextStyle defaultStyle = TextStyle(color: Colors.grey, fontSize: 15.0);
   TextStyle linkStyle = TextStyle(color: Colors.orange);
 
+  String name = "";
   String email = "";
   String password = "";
   String confirmPassword = "";
 
   void signup() async {
-    print(email + " " + password + " " + confirmPassword);
-    await FirebaseFunctions.signUp(email, password);
+    bool emailValid = RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(email);
+    if (emailValid && name.isNotEmpty) {
+      if (password.isNotEmpty &&
+          confirmPassword.isNotEmpty &&
+          password.trim().length >= 6 &&
+          confirmPassword.trim().length >= 6 &&
+          password == confirmPassword) {
+        print(email + " " + password + " " + confirmPassword);
+        await FirebaseFunctions.signUp(email, password, name);
+      }
+    }
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Error'),
+          content: Text("Wrong Credentials"),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -63,6 +93,11 @@ class _SignupState extends State<Signup> {
                   borderSide: BorderSide(color: Colors.orange),
                 ),
               ),
+              onChanged: (val) {
+                setState(() {
+                  name = val;
+                });
+              },
             ),
             SizedBox(
               height: 10,

@@ -17,8 +17,34 @@ class _SigninState extends State<Signin> {
   String password = "";
 
   void signin() async {
-    print("$email $password");
-    await FirebaseFunctions.signIn(email, password);
+    bool emailValid = RegExp(
+            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+        .hasMatch(email);
+    if (emailValid) {
+      if (password.isNotEmpty && password.trim().length >= 6) {
+        print("$email $password");
+        await FirebaseFunctions.signIn(email, password);
+        return;
+      }
+    }
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Error'),
+          content: Text("Wrong Credentials"),
+          actions: <Widget>[
+            FlatButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ],
+        );
+      },
+    );
   }
 
   @override
