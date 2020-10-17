@@ -4,7 +4,7 @@ import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:viewster/Loading.dart';
-import 'package:viewster/provider/FavoritesProvider.dart';
+import 'package:viewster/provider/UserInfoProvider.dart';
 
 class MovieDetails extends StatefulWidget {
   final int id;
@@ -54,7 +54,7 @@ class _MovieDetailsState extends State<MovieDetails> {
             IconButton(
                 icon: Icon(Icons.favorite_border),
                 onPressed: () async {
-                  await Provider.of<FavoritesProvider>(context, listen: false)
+                  await Provider.of<UserInfoProvider>(context, listen: false)
                       .addMovie(results);
                 })
           ]),

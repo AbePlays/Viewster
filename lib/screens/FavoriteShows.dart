@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:viewster/provider/FavoritesProvider.dart';
+import 'package:viewster/provider/UserInfoProvider.dart';
 
 import 'Search/SearchCard.dart';
 
@@ -25,7 +25,7 @@ class _FavoriteShowsState extends State<FavoriteShows> {
             height: 20,
           ),
           Expanded(
-            child: Consumer<FavoritesProvider>(
+            child: Consumer<UserInfoProvider>(
               builder: (context, favs, child) {
                 if (favs.favShows.length == 0) {
                   return Center(

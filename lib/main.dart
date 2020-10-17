@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:provider/provider.dart';
 import 'package:viewster/provider/AuthProvider.dart';
-import 'package:viewster/provider/FavoritesProvider.dart';
+import 'package:viewster/provider/UserInfoProvider.dart';
 import 'package:viewster/screens/BottomNavigator/BottomNavigator.dart';
 import 'package:viewster/screens/auth/AuthWrapper.dart';
 import 'package:viewster/Loading.dart';
@@ -53,7 +53,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => FavoritesProvider(),
+      create: (context) => UserInfoProvider(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

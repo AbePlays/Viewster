@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:viewster/firebase/Functions.dart' as FirebaseFunctions;
+import 'package:viewster/provider/UserInfoProvider.dart';
 
 class Profile extends StatefulWidget {
   @override
@@ -13,6 +15,8 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+    String name =
+        Provider.of<UserInfoProvider>(context, listen: false).userName;
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
       child: Column(
@@ -36,7 +40,7 @@ class _ProfileState extends State<Profile> {
           ),
           Center(
             child: Text(
-              "Hi, Abe",
+              "Hi, $name",
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ),

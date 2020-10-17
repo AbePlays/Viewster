@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:viewster/provider/FavoritesProvider.dart';
+import 'package:viewster/provider/UserInfoProvider.dart';
 import 'package:viewster/screens/FavoriteMovies.dart';
 import 'package:viewster/screens/FavoriteShows.dart';
 import 'package:viewster/screens/Home.dart';
@@ -24,8 +24,8 @@ class _BottomNavigatorState extends State<BottomNavigator> {
 
   void initProvider() async {
     Map res = await FirebaseFunctions.getDataFromFirestore();
-    Provider.of<FavoritesProvider>(context, listen: false)
-        .initFavs(res['favoriteMovies'], res['favoriteShows']);
+    Provider.of<UserInfoProvider>(context, listen: false).initFavs(
+        res['favoriteMovies'], res['favoriteShows'], res['name'], res['email']);
   }
 
   @override

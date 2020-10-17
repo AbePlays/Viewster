@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:viewster/provider/FavoritesProvider.dart';
+import 'package:viewster/provider/UserInfoProvider.dart';
 import 'package:viewster/screens/Search/SearchCard.dart';
 
 class FavoriteMovies extends StatefulWidget {
@@ -26,7 +26,7 @@ class _FavoriteMoviesState extends State<FavoriteMovies> {
             height: 20,
           ),
           Expanded(
-            child: Consumer<FavoritesProvider>(
+            child: Consumer<UserInfoProvider>(
               builder: (context, favs, child) {
                 if (favs.favMovies.length == 0) {
                   return Center(

@@ -91,7 +91,6 @@ Future<Map> getDataFromFirestore() async {
     DocumentSnapshot doc =
         await firestore.collection("users").doc(user.uid).get();
     Map docData = doc.data();
-    print(docData);
     return docData;
   } catch (e) {
     print(e);

@@ -3,16 +3,20 @@ import 'package:viewster/firebase/Functions.dart' as FirebaseFunctions;
 import 'package:viewster/models/MovieModel.dart';
 import 'package:viewster/models/ShowModel.dart';
 
-class FavoritesProvider extends ChangeNotifier {
+class UserInfoProvider extends ChangeNotifier {
+  String userName = "";
+  String userEmail = "";
   List favoriteShows = [];
   List favoriteMovies = [];
 
   List get favShows => favoriteShows;
   List get favMovies => favoriteMovies;
 
-  void initFavs(List movies, List shows) {
+  void initFavs(List movies, List shows, String name, String email) {
     favoriteShows = shows;
     favoriteMovies = movies;
+    userName = name;
+    userEmail = email;
   }
 
   Future<void> addMovie(Map data) async {
