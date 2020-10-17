@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:viewster/firebase/Functions.dart' as FirebaseFunctions;
 
 class Profile extends StatefulWidget {
   @override
@@ -7,14 +7,8 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  FirebaseAuth auth = FirebaseAuth.instance;
-
   void signout() async {
-    try {
-      await auth.signOut();
-    } catch (e) {
-      print(e);
-    }
+    await FirebaseFunctions.signout();
   }
 
   @override

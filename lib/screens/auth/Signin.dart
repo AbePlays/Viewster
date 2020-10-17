@@ -1,6 +1,8 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:viewster/firebase/Functions.dart' as FirebaseFunctions;
+import 'package:viewster/provider/AuthProvider.dart';
 
 class Signin extends StatefulWidget {
   @override
@@ -8,8 +10,6 @@ class Signin extends StatefulWidget {
 }
 
 class _SigninState extends State<Signin> {
-  FirebaseAuth auth = FirebaseAuth.instance;
-
   TextStyle defaultStyle = TextStyle(color: Colors.grey, fontSize: 15.0);
   TextStyle linkStyle = TextStyle(color: Colors.orange);
 
@@ -18,11 +18,7 @@ class _SigninState extends State<Signin> {
 
   void signin() async {
     print("$email $password");
-    UserCredential result =
-        await auth.signInWithEmailAndPassword(email: email, password: password);
-
-    User user = result.user;
-    print(user);
+    await FirebaseFunctions.signIn(email, password);
   }
 
   @override
@@ -124,7 +120,11 @@ class _SigninState extends State<Signin> {
                     TextSpan(
                       text: 'Sign up',
                       style: linkStyle,
-                      recognizer: TapGestureRecognizer()..onTap = () {},
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Provider.of<AuthProvider>(context, listen: false)
+                              .change();
+                        },
                     ),
                   ],
                 ),
