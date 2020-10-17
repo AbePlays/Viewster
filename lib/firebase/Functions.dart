@@ -59,7 +59,7 @@ User getCurrentUser() {
   return null;
 }
 
-Future<void> addDataToFirestore(Map data) async {
+Future<void> updateFirestore(List movies, List shows) async {
   User user = getCurrentUser();
   if (user == null) {
     print("Error");
@@ -69,12 +69,13 @@ Future<void> addDataToFirestore(Map data) async {
     DocumentSnapshot doc =
         await firestore.collection("users").doc(user.uid).get();
     Map docData = doc.data();
-    docData['favoriteMovies'].add(data);
+    docData['favoriteMovies'] = movies;
+    docData['favoriteShows'] = shows;
 
-    await firestore
-        .collection("users")
-        .doc(user.uid)
-        .update({"favoriteMovies": docData['favoriteMovies']});
+    await firestore.collection("users").doc(user.uid).update({
+      "favoriteMovies": docData['favoriteMovies'],
+      "favoriteShows": docData['favoriteShows']
+    });
   } catch (e) {
     print(e);
   }

@@ -29,17 +29,21 @@ class _FavoriteMoviesState extends State<FavoriteMovies> {
             child: Consumer<FavoritesProvider>(
               builder: (context, favs, child) {
                 if (favs.favMovies.length == 0) {
-                  return Text("Favorites Empty");
+                  return Center(
+                      child: Text(
+                    "Favorites Empty",
+                    style: TextStyle(fontSize: 20),
+                  ));
                 } else {
                   return ListView.separated(
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
                         return SearchCard(
-                          imageUrl: favs.favMovies[index].imageUrl,
-                          language: favs.favMovies[index].language,
-                          releaseDate: favs.favMovies[index].releaseDate,
-                          title: favs.favMovies[index].title,
-                          votes: favs.favMovies[index].votes,
+                          imageUrl: favs.favMovies[index]['imageUrl'],
+                          language: favs.favMovies[index]['language'],
+                          releaseDate: favs.favMovies[index]['releaseDate'],
+                          title: favs.favMovies[index]['title'],
+                          votes: favs.favMovies[index]['votes'],
                         );
                       },
                       separatorBuilder: (context, index) {

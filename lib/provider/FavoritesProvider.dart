@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:viewster/firebase/Functions.dart' as FirebaseFunctions;
 import 'package:viewster/models/MovieModel.dart';
+import 'package:viewster/models/ShowModel.dart';
 
 class FavoritesProvider extends ChangeNotifier {
   List favoriteShows = [];
@@ -18,12 +19,24 @@ class FavoritesProvider extends ChangeNotifier {
         releaseDate: data['release_date'],
         votes: data['vote_average'].toString());
 
-    favoriteMovies.add(model);
+    favoriteMovies.add(model.toJson());
     notifyListeners();
-    await FirebaseFunctions.addDataToFirestore(model.toJson());
+    await FirebaseFunctions.updateFirestore(favoriteMovies, favoriteShows);
   }
 
-  addShow() {}
+  Future<void> addShow(Map data) async {
+    ShowModel model = new ShowModel(
+        id: data['id'],
+        title: data['original_name'],
+        imageUrl: data['poster_path'],
+        language: data['original_language'],
+        releaseDate: data['first_air_date'],
+        votes: data['vote_average'].toString());
+
+    favoriteShows.add(model.toJson());
+    notifyListeners();
+    await FirebaseFunctions.updateFirestore(favoriteMovies, favoriteShows);
+  }
 
   removeShow() {}
 
