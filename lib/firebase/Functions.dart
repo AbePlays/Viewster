@@ -80,3 +80,21 @@ Future<void> updateFirestore(List movies, List shows) async {
     print(e);
   }
 }
+
+Future<Map> getDataFromFirestore() async {
+  User user = getCurrentUser();
+  if (user == null) {
+    print("Error");
+    return null;
+  }
+  try {
+    DocumentSnapshot doc =
+        await firestore.collection("users").doc(user.uid).get();
+    Map docData = doc.data();
+    print(docData);
+    return docData;
+  } catch (e) {
+    print(e);
+  }
+  return null;
+}

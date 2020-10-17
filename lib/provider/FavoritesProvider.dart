@@ -10,6 +10,11 @@ class FavoritesProvider extends ChangeNotifier {
   List get favShows => favoriteShows;
   List get favMovies => favoriteMovies;
 
+  void initFavs(List movies, List shows) {
+    favoriteShows = shows;
+    favoriteMovies = movies;
+  }
+
   Future<void> addMovie(Map data) async {
     MovieModel model = new MovieModel(
         id: data['id'],

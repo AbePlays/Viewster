@@ -30,6 +30,7 @@ class _SignupState extends State<Signup> {
           password == confirmPassword) {
         print(email + " " + password + " " + confirmPassword);
         await FirebaseFunctions.signUp(email, password, name);
+        return;
       }
     }
 

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:viewster/provider/FavoritesProvider.dart';
 import 'package:viewster/screens/FavoriteMovies.dart';
 import 'package:viewster/screens/FavoriteShows.dart';
 import 'package:viewster/screens/Home.dart';
 import 'package:viewster/screens/Profile.dart';
+import 'package:viewster/firebase/Functions.dart' as FirebaseFunctions;
 
 class BottomNavigator extends StatefulWidget {
   @override
@@ -18,6 +21,18 @@ class _BottomNavigatorState extends State<BottomNavigator> {
     FavoriteMovies(),
     Profile()
   ];
+
+  void initProvider() async {
+    Map res = await FirebaseFunctions.getDataFromFirestore();
+    Provider.of<FavoritesProvider>(context, listen: false)
+        .initFavs(res['favoriteMovies'], res['favoriteShows']);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initProvider();
+  }
 
   @override
   Widget build(BuildContext context) {
