@@ -16,14 +16,14 @@ class _SigninState extends State<Signin> {
   String email = "";
   String password = "";
 
-  void signin() async {
+  void signin() {
     bool emailValid = RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(email);
     if (emailValid) {
       if (password.isNotEmpty && password.trim().length >= 6) {
         print("$email $password");
-        await FirebaseFunctions.signIn(email, password);
+        FirebaseFunctions.signIn(email, password);
         return;
       }
     }
@@ -127,7 +127,7 @@ class _SigninState extends State<Signin> {
                 onPressed: signin,
                 child: Text(
                   "Log in",
-                  style: TextStyle(fontSize: 15),
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
                 textColor: Colors.white,
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),

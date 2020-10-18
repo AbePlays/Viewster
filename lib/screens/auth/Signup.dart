@@ -18,7 +18,7 @@ class _SignupState extends State<Signup> {
   String password = "";
   String confirmPassword = "";
 
-  void signup() async {
+  void signup() {
     bool emailValid = RegExp(
             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
         .hasMatch(email);
@@ -29,7 +29,7 @@ class _SignupState extends State<Signup> {
           confirmPassword.trim().length >= 6 &&
           password == confirmPassword) {
         print(email + " " + password + " " + confirmPassword);
-        await FirebaseFunctions.signUp(email, password, name);
+        FirebaseFunctions.signUp(email, password, name);
         return;
       }
     }
@@ -173,7 +173,7 @@ class _SignupState extends State<Signup> {
                 onPressed: signup,
                 child: Text(
                   "Sign up",
-                  style: TextStyle(fontSize: 15),
+                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.bold),
                 ),
                 textColor: Colors.white,
                 padding: EdgeInsets.symmetric(vertical: 10, horizontal: 30),

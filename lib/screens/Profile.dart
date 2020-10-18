@@ -9,8 +9,8 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  void signout() async {
-    await FirebaseFunctions.signout();
+  void signout() {
+    FirebaseFunctions.signout();
   }
 
   @override

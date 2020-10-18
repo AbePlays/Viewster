@@ -30,10 +30,10 @@ class UserInfoProvider extends ChangeNotifier {
 
     favoriteMovies.add(model.toJson());
     notifyListeners();
-    await FirebaseFunctions.updateFirestore(favoriteMovies, favoriteShows);
+    FirebaseFunctions.updateFirestore(favoriteMovies, favoriteShows);
   }
 
-  void addShow(Map data) async {
+  void addShow(Map data) {
     ShowModel model = new ShowModel(
         id: data['id'],
         title: data['original_name'],
@@ -44,19 +44,19 @@ class UserInfoProvider extends ChangeNotifier {
 
     favoriteShows.add(model.toJson());
     notifyListeners();
-    await FirebaseFunctions.updateFirestore(favoriteMovies, favoriteShows);
+    FirebaseFunctions.updateFirestore(favoriteMovies, favoriteShows);
   }
 
-  void removeShow(int id) async {
+  void removeShow(int id) {
     favoriteShows.removeWhere((show) => show['id'] == id);
     notifyListeners();
-    await FirebaseFunctions.updateFirestore(favoriteMovies, favoriteShows);
+    FirebaseFunctions.updateFirestore(favoriteMovies, favoriteShows);
   }
 
-  void removeMovie(int id) async {
+  void removeMovie(int id) {
     favoriteMovies.removeWhere((movie) => movie['id'] == id);
     notifyListeners();
-    await FirebaseFunctions.updateFirestore(favoriteMovies, favoriteShows);
+    FirebaseFunctions.updateFirestore(favoriteMovies, favoriteShows);
   }
 
   bool isMoviePresent(int id) {

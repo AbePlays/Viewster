@@ -34,7 +34,7 @@ class _TrendingState extends State<Trending> {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: FadeInImage.assetNetwork(
-                    placeholder: 'assets/images/notfound.png',
+                    placeholder: 'assets/images/film-poster-placeholder.png',
                     image:
                         "https://image.tmdb.org/t/p/w185${widget.list[index]['poster_path']}"),
               ),

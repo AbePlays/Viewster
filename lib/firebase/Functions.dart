@@ -21,7 +21,7 @@ void signUp(String email, String password, String name) async {
         email: email, password: password);
     User user = result.user;
     print(user);
-    await createUserInFirestore(user, name);
+    createUserInFirestore(user, name);
   } catch (e) {
     print(e);
   }
