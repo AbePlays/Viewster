@@ -16,7 +16,6 @@ class _HomeState extends State<Home> {
   void getTrendingMovies() async {
     String url =
         'https://api.themoviedb.org/3/trending/movie/week?api_key=6458ca648b70d6d3d574f8e0b2ce817d';
-    print(url);
 
     try {
       var response = await http.get(url);
@@ -32,7 +31,6 @@ class _HomeState extends State<Home> {
   void getTrendingShows() async {
     String url =
         'https://api.themoviedb.org/3/trending/tv/week?api_key=6458ca648b70d6d3d574f8e0b2ce817d';
-    print(url);
 
     try {
       var response = await http.get(url);
@@ -109,7 +107,7 @@ class _HomeState extends State<Home> {
             children: <Widget>[
               Text(
                 'Trending Shows',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               Text(
                 "More",
@@ -135,7 +133,7 @@ class _HomeState extends State<Home> {
             children: <Widget>[
               Text(
                 'Trending Movies',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15),
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
               ),
               Text(
                 "More",

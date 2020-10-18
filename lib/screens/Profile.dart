@@ -18,7 +18,7 @@ class _ProfileState extends State<Profile> {
     String name =
         Provider.of<UserInfoProvider>(context, listen: false).userName;
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 final FirebaseFirestore firestore = FirebaseFirestore.instance;
 final FirebaseAuth auth = FirebaseAuth.instance;
 
-Future<void> signIn(String email, String password) async {
+void signIn(String email, String password) async {
   try {
     UserCredential result =
         await auth.signInWithEmailAndPassword(email: email, password: password);
@@ -15,7 +15,7 @@ Future<void> signIn(String email, String password) async {
   }
 }
 
-Future<void> signUp(String email, String password, String name) async {
+void signUp(String email, String password, String name) async {
   try {
     UserCredential result = await auth.createUserWithEmailAndPassword(
         email: email, password: password);
@@ -27,7 +27,7 @@ Future<void> signUp(String email, String password, String name) async {
   }
 }
 
-Future<void> signout() async {
+void signout() async {
   try {
     await auth.signOut();
   } catch (e) {
@@ -35,7 +35,7 @@ Future<void> signout() async {
   }
 }
 
-Future<void> createUserInFirestore(User user, String name) async {
+void createUserInFirestore(User user, String name) async {
   try {
     await firestore.collection('users').doc(user.uid).set({
       "name": name,
@@ -59,7 +59,7 @@ User getCurrentUser() {
   return null;
 }
 
-Future<void> updateFirestore(List movies, List shows) async {
+void updateFirestore(List movies, List shows) async {
   User user = getCurrentUser();
   if (user == null) {
     print("Error");

@@ -28,12 +28,10 @@ class _MyAppState extends State<MyApp> {
         checking = false;
       });
       if (user == null) {
-        print("Nope");
         setState(() {
           userFound = false;
         });
       } else {
-        print("Yep");
         setState(() {
           userFound = true;
         });
@@ -56,9 +54,8 @@ class _MyAppState extends State<MyApp> {
       create: (context) => UserInfoProvider(),
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(fontFamily: 'Poppins'),
         home: checking
             ? Loading()
             : userFound

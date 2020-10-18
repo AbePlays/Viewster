@@ -50,7 +50,7 @@ class _SearchCardState extends State<SearchCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Text(
-                          "Language : ${widget.language ?? "-"}",
+                          "Language : ${widget.language == "en" ? "English" : widget.language ?? "-"}",
                           style: TextStyle(
                               color: Colors.grey,
                               fontWeight: FontWeight.bold,

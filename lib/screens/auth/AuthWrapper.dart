@@ -14,7 +14,7 @@ class _AuthWrapperState extends State<AuthWrapper> {
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(
       builder: (context, auth, child) {
-        if (auth.isSignedIn == true) {
+        if (auth.isSigningIn == true) {
           return Signin();
         } else {
           return Signup();

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AuthProvider extends ChangeNotifier {
   bool signIn = true;
 
-  bool get isSignedIn => signIn;
+  bool get isSigningIn => signIn;
 
   change() {
     signIn = !signIn;
