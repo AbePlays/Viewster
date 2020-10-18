@@ -55,14 +55,18 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 30),
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
-              Text("Viewster"),
+              Text(
+                "VIEWSTER",
+                style: TextStyle(
+                    fontSize: 20, letterSpacing: 2, color: Colors.grey),
+              ),
               Container(
                 child: Row(
                   children: <Widget>[

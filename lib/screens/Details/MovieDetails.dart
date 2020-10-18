@@ -82,10 +82,11 @@ class _MovieDetailsState extends State<MovieDetails> {
                               fontWeight: FontWeight.bold, fontSize: 30),
                         ),
                         Container(
-                          height: 25,
+                          padding: EdgeInsets.symmetric(vertical: 5),
+                          height: 35,
                           child: ListView.separated(
                             scrollDirection: Axis.horizontal,
-                            itemCount: results['genres'].length ?? 0,
+                            itemCount: results['genres'].length == 0 ? 0 : 2,
                             itemBuilder: (context, index) {
                               return Text(
                                 results['genres'][index]['name'],
