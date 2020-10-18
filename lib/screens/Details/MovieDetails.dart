@@ -51,12 +51,25 @@ class _MovieDetailsState extends State<MovieDetails> {
           centerTitle: true,
           backgroundColor: Colors.black12,
           actions: <Widget>[
-            IconButton(
-                icon: Icon(Icons.favorite_border),
-                onPressed: () async {
-                  await Provider.of<UserInfoProvider>(context, listen: false)
-                      .addMovie(results);
-                })
+            Consumer<UserInfoProvider>(
+              builder: (context, favs, child) {
+                if (favs.isMoviePresent(widget.id)) {
+                  return IconButton(
+                      icon: Icon(Icons.favorite),
+                      onPressed: () {
+                        Provider.of<UserInfoProvider>(context, listen: false)
+                            .removeMovie(widget.id);
+                      });
+                } else {
+                  return IconButton(
+                      icon: Icon(Icons.favorite_border),
+                      onPressed: () {
+                        Provider.of<UserInfoProvider>(context, listen: false)
+                            .addMovie(results);
+                      });
+                }
+              },
+            ),
           ]),
       body: loading
           ? Loading()

@@ -19,7 +19,7 @@ class UserInfoProvider extends ChangeNotifier {
     userEmail = email;
   }
 
-  Future<void> addMovie(Map data) async {
+  void addMovie(Map data) async {
     MovieModel model = new MovieModel(
         id: data['id'],
         title: data['original_title'],
@@ -33,7 +33,7 @@ class UserInfoProvider extends ChangeNotifier {
     await FirebaseFunctions.updateFirestore(favoriteMovies, favoriteShows);
   }
 
-  Future<void> addShow(Map data) async {
+  void addShow(Map data) async {
     ShowModel model = new ShowModel(
         id: data['id'],
         title: data['original_name'],
@@ -47,7 +47,23 @@ class UserInfoProvider extends ChangeNotifier {
     await FirebaseFunctions.updateFirestore(favoriteMovies, favoriteShows);
   }
 
-  removeShow() {}
+  void removeShow(int id) async {
+    favoriteShows.removeWhere((show) => show['id'] == id);
+    notifyListeners();
+    await FirebaseFunctions.updateFirestore(favoriteMovies, favoriteShows);
+  }
 
-  removeMovie() {}
+  void removeMovie(int id) async {
+    favoriteMovies.removeWhere((movie) => movie['id'] == id);
+    notifyListeners();
+    await FirebaseFunctions.updateFirestore(favoriteMovies, favoriteShows);
+  }
+
+  bool isMoviePresent(int id) {
+    return favMovies.where((movie) => movie['id'] == id).length != 0;
+  }
+
+  bool isShowPresent(int id) {
+    return favShows.where((show) => show['id'] == id).length != 0;
+  }
 }

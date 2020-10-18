@@ -51,12 +51,25 @@ class _TvDetailsState extends State<TvDetails> {
         centerTitle: true,
         backgroundColor: Colors.black12,
         actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.favorite_border),
-              onPressed: () async {
-                await Provider.of<UserInfoProvider>(context, listen: false)
-                    .addShow(results);
-              })
+          Consumer<UserInfoProvider>(
+            builder: (context, favs, child) {
+              if (favs.isShowPresent(widget.id)) {
+                return IconButton(
+                    icon: Icon(Icons.favorite),
+                    onPressed: () {
+                      Provider.of<UserInfoProvider>(context, listen: false)
+                          .removeShow(widget.id);
+                    });
+              } else {
+                return IconButton(
+                    icon: Icon(Icons.favorite_border),
+                    onPressed: () {
+                      Provider.of<UserInfoProvider>(context, listen: false)
+                          .addShow(results);
+                    });
+              }
+            },
+          ),
         ],
       ),
       body: loading
