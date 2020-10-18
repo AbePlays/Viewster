@@ -1,6 +1,16 @@
-# viewster
+# Viewster
 
 A new Flutter project.
+
+## Screenshot
+
+<p align="center">
+  <img src="Screenshots/Signin.png" width="200">
+  <img src="Screenshots/Home.png" width="200">
+  <img src="Screenshots/Search.png" width="200">
+  <img src="Screenshots/Details.png" width="200">
+  <img src="Screenshots/Favorites.png" width="200">
+</p>
 
 ## Getting Started
 
