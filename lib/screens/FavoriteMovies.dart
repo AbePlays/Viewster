@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:viewster/provider/UserInfoProvider.dart';
+import 'package:viewster/screens/Details/MovieDetails.dart';
 import 'package:viewster/screens/Search/SearchCard.dart';
 
 class FavoriteMovies extends StatefulWidget {
@@ -38,12 +39,22 @@ class _FavoriteMoviesState extends State<FavoriteMovies> {
                   return ListView.separated(
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
-                        return SearchCard(
-                          imageUrl: favs.favMovies[index]['imageUrl'],
-                          language: favs.favMovies[index]['language'],
-                          releaseDate: favs.favMovies[index]['releaseDate'],
-                          title: favs.favMovies[index]['title'],
-                          votes: favs.favMovies[index]['votes'],
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MovieDetails(
+                                          id: favs.favMovies[index]['id'],
+                                        )));
+                          },
+                          child: SearchCard(
+                            imageUrl: favs.favMovies[index]['imageUrl'],
+                            language: favs.favMovies[index]['language'],
+                            releaseDate: favs.favMovies[index]['releaseDate'],
+                            title: favs.favMovies[index]['title'],
+                            votes: favs.favMovies[index]['votes'],
+                          ),
                         );
                       },
                       separatorBuilder: (context, index) {

@@ -125,6 +125,7 @@ class _HomeState extends State<Home> {
           ),
           Trending(
             list: trendingShows,
+            isShow: true,
           ),
           SizedBox(
             height: 20,
@@ -150,6 +151,7 @@ class _HomeState extends State<Home> {
           ),
           Trending(
             list: trendingMovies,
+            isShow: false,
           )
         ],
       ),

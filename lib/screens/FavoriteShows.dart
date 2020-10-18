@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:viewster/provider/UserInfoProvider.dart';
+import 'package:viewster/screens/Details/TvDetails.dart';
 
 import 'Search/SearchCard.dart';
 
@@ -37,12 +38,22 @@ class _FavoriteShowsState extends State<FavoriteShows> {
                   return ListView.separated(
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
-                        return SearchCard(
-                          imageUrl: favs.favShows[index]['imageUrl'],
-                          language: favs.favShows[index]['language'],
-                          releaseDate: favs.favShows[index]['releaseDate'],
-                          title: favs.favShows[index]['title'],
-                          votes: favs.favShows[index]['votes'],
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => TvDetails(
+                                          id: favs.favShows[index]['id'],
+                                        )));
+                          },
+                          child: SearchCard(
+                            imageUrl: favs.favShows[index]['imageUrl'],
+                            language: favs.favShows[index]['language'],
+                            releaseDate: favs.favShows[index]['releaseDate'],
+                            title: favs.favShows[index]['title'],
+                            votes: favs.favShows[index]['votes'],
+                          ),
                         );
                       },
                       separatorBuilder: (context, index) {
